@@ -1,40 +1,28 @@
-const Employee = require('../lib/Engineer.js');
+const Engineer = require('../lib/Engineer.js');
+//const Employee = require('../lib/Employee.js');
+
 
 // test to set properties
 
-test('can instantiate an Employe object from constructor arg', () => {
-    const e = new Employee('Sam', 1, 'dog@mail.com');
+test('can set github from constructor argument', () => {
+    const e = new Engineer('Sam', 1, 'dog@mail.com', 'sam123');
 
-    expect(e.name).toEqual('Sam');
-    expect(e.id).toEqual(1);
-    expect(e.email).toEqual('dog@mail.com');
+    expect(e.github).toEqual('sam123');
 });
 
 // tests to get properties
 
-test('can get the employee name via getName()', () => {
-    const e = new Employee('Sam', 1, 'dog@mail.com');
+test('can get github via getGithub()', () => {
+    const e = new Engineer('Sam', 1, 'dog@mail.com', 'sam123');
 
-    expect(e.getName()).toEqual(expect.stringContaining(e.name.toString()));
+    expect(e.getGithub()).toEqual(expect.stringContaining(e.github.toString()));
 });
 
-test('can get the employee id via getId()', () => {
-    const e = new Employee('Sam', 1, 'dog@mail.com');
 
-    expect(e.getId()).toEqual(expect.any(Number));
+test('getRole() should return "Engineer" ', () => {
+    const e = new Engineer('Sam', 1, 'dog@mail.com', 'sam123');
 
-});
-
-test('can get the employee email via getEmail()', () => {
-    const e = new Employee('Sam', 1, 'dog@mail.com');
-
-    expect(e.getEmail()).toEqual(expect.stringContaining(e.email.toString()));
-});
-
-test('can get the employee role via getRole()', () => {
-    const e = new Employee('Sam', 1, 'dog@mail.com');
-
-    expect(e.getRole()).toEqual(expect.stringContaining('Employee'));
+    expect(e.getRole()).toEqual(expect.stringContaining('Engineer'));
 });
     
     
