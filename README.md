@@ -2,4 +2,4 @@
 
 
 
-![Screenshot](./screenshot.png)
+![Screenshot](./dist/screenshot.png)
