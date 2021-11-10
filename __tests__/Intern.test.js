@@ -1,4 +1,4 @@
-const Engineer = require('../lib/Engineer.js');
+const Intern = require('../lib/Intern.js');
 //const Employee = require('../lib/Employee.js');
 
 
@@ -13,14 +13,14 @@ test('can set school from constructor argument', () => {
 // tests to get properties
 
 test('can get school via getSchool()', () => {
-    const e = new Engineer('Sam', 1, 'dog@mail.com', 'UBC');
+    const e = new Intern('Sam', 1, 'dog@mail.com', 'UBC');
 
     expect(e.getSchool()).toEqual(expect.stringContaining(e.school.toString()));
 });
 
 
 test('getRole() should return "Intern" ', () => {
-    const e = new Engineer('Sam', 1, 'dog@mail.com', 'UBC');
+    const e = new Intern('Sam', 1, 'dog@mail.com', 'UBC');
 
     expect(e.getRole()).toEqual(expect.stringContaining('Intern'));
 });
