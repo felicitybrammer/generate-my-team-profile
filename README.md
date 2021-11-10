@@ -2,5 +2,5 @@
 
 
 
-![Screenshot](dist/screenshot.png)
+
 
