@@ -1,8 +1,8 @@
-const Employee = require('../lib/Employee.js');
+const Employee = require('../lib/Engineer.js');
 
 // test to set properties
 
-test('can instantiate an Employee object from constructor arg', () => {
+test('can instantiate an Employe object from constructor arg', () => {
     const e = new Employee('Sam', 1, 'dog@mail.com');
 
     expect(e.name).toEqual('Sam');
