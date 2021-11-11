@@ -59,9 +59,6 @@
   
   module.exports = team => {
       
-      //destructure projects and about data from templateData based on their property key names
-      //creates three variables based on data in template
-      //const {projects, about, ...header} = templateData;
       return `
       <!DOCTYPE html> 
       <html lang="en"> 
@@ -88,9 +85,7 @@
           ${generateTeam(team)}
           
         </main>
-        // <footer class="container text-center py-3">
-        //   <h3 class="text-dark">&copy; ${new Date().getFullYear()} by ${header.name}</h3>
-        // </footer> 
+      
       </body>
       </html>
       `;
