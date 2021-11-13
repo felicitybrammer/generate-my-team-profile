@@ -2,9 +2,12 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-
+const generateTeam = require('./src/page-template');
+let team;
 const fs = require('fs');
-const {writeFile, copyFile} = require('./lib/generate-page.js');
+//const {writeFile, copyFile} = require('./lib/generate-page.js');
+
+
 
 
 const questions = [
@@ -49,8 +52,8 @@ const questions = [
             return false;
         }
     },
-    {
-        type: 'input',
+    {   
+        type: 'input',   
         name: 'email',
         message: "Please give the employee's email address",
         validate: email => {
@@ -59,12 +62,77 @@ const questions = [
             return false;
         }
     },
-    // if manager get office number
-    //if engineer get github
-    //if intern get school
-    {}
+    { 
+        // if manager get office number
+        type: 'input',
+        name: 'office number',
+        message: "FOR MANAGERS ONLY. Please enter the employee's office number",
+        when: ({role}) => {
+            if (role === 'Manager') return true;
+            return false;
+        }
+    },
+    {
+        //if engineer get github  
+        type: 'input',
+        name: 'github',
+        message: "FOR ENGINEERS ONLY. Please enter the employee's github username",
+        when: ({role}) => {
+            if (role === 'Engineer') return true;
+            return false;
+        }
+    },
+    {
+        //if intern get school
+        type: 'input',
+        name: 'school',
+        message: "FOR INTERNS ONLY. Please enter the name of the employee's school",
+        when: ({role}) => {
+            if (role === 'Intern') return true;
+            return false;
+        }
+    },
+    {
+        //ask to add another employee
+        type: 'confirm',
+        name: 'addNew',
+        message: 'Add another employee?',
+        default: false
+    }  
 ];
 
+// const writeFile = fileContent => {
+//     //return new Promise((resolve, reject) => {
+//         fs.writeFile('./dist/index.html', fileContent, err => {
+//             if (err) {
+//                 throw (err);
+//                 return;
+//             }
+
+//             // resolve({
+//             //     ok: true,
+//             //     message: 'File created!'
+//             // });
+//         });
+//     };
+
+
+// const copyFile = () => {
+//     //return new Promise((resolve, reject) => {
+//         fs.copyFile('./src/style.css', './dist/style.css', err => {
+//             if (err) {
+//                 reject(err);
+//                 return;
+//             }
+//             resolve({
+//                 ok: true,
+//                 message: 'File copied!'
+//             });
+    
+//         });
+//     };
+
+// create the team array of employees
 function start() {
     if (!team) {
         team = [];
@@ -73,9 +141,16 @@ function start() {
         .prompt(questions)
         .then(({role, ...employee}) => {
             switch (role) {
-                case 'Manager':
+                case 'Manager': 
                     team.push(new Manager(employee.name, employee.id, employee.email, employee.officeNumber));
                     break;
+                case 'Engineer':
+                    team.push(new Engineer(employee.name, employee.id, employee.email, employee.gitbhub));
+                    break;
+                case 'Intern':
+                    team.push(new Intern(employee.name, employee.id, employee.email, employee.github));
+                    break;
+
             }
 
             if (employee.addNew) {
@@ -87,44 +162,25 @@ function start() {
         });
 };
 
- function generateNewPage(team) {
-     fs.writeFile('./dist/index.html', //from where?);
+// generate html with values from inquirer prompts
+function generateNewPage(team) {
+     //fs.writeFile('./dist/index.html', //from where?);
 
-     fs.copyFile('.src/style.css'
+     //fs.copyFile('.src/style.css'
+     const fileContent = generateTeam(team);
 
+     fs.writeFile('./dist/index.html', fileContent, err => {
+         if (err)
+          throw err;
+     });
 
-        const writeFile = fileContent => {
-            return new Promise((resolve, reject) => {
-                fs.writeFile('./dist/index.html', fileContent, err => {
-                    if (err) {
-                        reject(err);
-                        return;
-                    }
+     fs.copyFile('./src/style.css', './dist/style.css', err => {
+         if (err)
+            throw err;
+     });
 
-                    resolve({
-                        ok: true,
-                        message: 'File created!'
-                    });
-                });
-            });
-        };
-
-        const copyFile = () => {
-            return new Promise((resolve, reject) => {
-                fs.copyFile('./src/style.css', './dist/style.css', err => {
-                    if (err) {
-                        reject(err);
-                        return;
-                    }
-                    
-                    resolve({
-                        ok: true,
-                        message: 'File copied!'
-                    });
-            
-            });
-            });
-        };
- };
+};
+    
+ 
 
 start();

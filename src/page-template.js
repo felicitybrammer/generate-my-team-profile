@@ -76,9 +76,7 @@
         <header>
           <div class="container flex-row justify-space-between align-center py-3">
             <h1 class="page-title text-secondary bg-dark text-light py-2 px-3">My Team</h1>
-            // <nav class="flex-row">  
-            //   <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/${header.github}">Github</a>
-            // </nav>
+            
           </div>
         </header>
         <main class="container my-5">
