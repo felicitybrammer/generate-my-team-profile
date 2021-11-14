@@ -2,13 +2,9 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const generateTeam = require('./src/page-template');
+const generateTemplate = require('./src/page-template');
 let team;
 const fs = require('fs');
-//const {writeFile, copyFile} = require('./lib/generate-page.js');
-
-
-
 
 const questions = [
     {
@@ -65,7 +61,7 @@ const questions = [
     { 
         // if manager get office number
         type: 'input',
-        name: 'office number',
+        name: 'officeNumber',
         message: "FOR MANAGERS ONLY. Please enter the employee's office number",
         when: ({role}) => {
             if (role === 'Manager') return true;
@@ -98,39 +94,8 @@ const questions = [
         name: 'addNew',
         message: 'Add another employee?',
         default: false
-    }  
+    } 
 ];
-
-// const writeFile = fileContent => {
-//     //return new Promise((resolve, reject) => {
-//         fs.writeFile('./dist/index.html', fileContent, err => {
-//             if (err) {
-//                 throw (err);
-//                 return;
-//             }
-
-//             // resolve({
-//             //     ok: true,
-//             //     message: 'File created!'
-//             // });
-//         });
-//     };
-
-
-// const copyFile = () => {
-//     //return new Promise((resolve, reject) => {
-//         fs.copyFile('./src/style.css', './dist/style.css', err => {
-//             if (err) {
-//                 reject(err);
-//                 return;
-//             }
-//             resolve({
-//                 ok: true,
-//                 message: 'File copied!'
-//             });
-    
-//         });
-//     };
 
 // create the team array of employees
 function start() {
@@ -145,30 +110,26 @@ function start() {
                     team.push(new Manager(employee.name, employee.id, employee.email, employee.officeNumber));
                     break;
                 case 'Engineer':
-                    team.push(new Engineer(employee.name, employee.id, employee.email, employee.gitbhub));
+                    team.push(new Engineer(employee.name, employee.id, employee.email, employee.github));
                     break;
                 case 'Intern':
-                    team.push(new Intern(employee.name, employee.id, employee.email, employee.github));
+                    team.push(new Intern(employee.name, employee.id, employee.email, employee.school));
                     break;
-
             }
 
             if (employee.addNew) {
                 start(team);
-            } 
-
-            generateNewPage(team);
-
+            } else {
+                //console.log(generateTeam(team))
+                generateNewPage(team)
+            }
         });
 };
 
 // generate html with values from inquirer prompts
 function generateNewPage(team) {
-     //fs.writeFile('./dist/index.html', //from where?);
-
-     //fs.copyFile('.src/style.css'
-     const fileContent = generateTeam(team);
-
+    const fileContent = generateTemplate(team);
+    //console.log(fileContent);
      fs.writeFile('./dist/index.html', fileContent, err => {
          if (err)
           throw err;
@@ -181,6 +142,4 @@ function generateNewPage(team) {
 
 };
     
- 
-
 start();
