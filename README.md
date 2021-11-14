@@ -11,6 +11,10 @@ An example team profile with manager, two engineers and two interns. Team sizes 
 
 * run npm install from the command line
 * add the following dependencies: jest for running tests and inquirer for collecting input
+
+Here is a video to walk you through the process of installing, running and testing the application: 
+https://drive.google.com/file/d/1JPBEpt7gehxLC6pms8bvN-ByVQxJgCrS/view?usp=sharing
+
 ## User Input
 
 The application will prompt the user with question to build an engineering team. A team consists of a manager amd any number of engineers and interns.
@@ -24,6 +28,7 @@ Each team member will display the following:
 * ID
 * Email Address
 * Role-specific property: office number, github username, or school
+
 ## Testing
 
 To run a test, enter 'npm run test' for all test suites
