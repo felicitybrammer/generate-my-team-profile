@@ -40,7 +40,7 @@
                     <div class="card-body flex-column bg-light">
                        <p>ID: ${Engineer.id}</p>
                        <p>Email: ${Engineer.email}</p>
-                       <p>Github: <a href='https://github.com/${Engineer.github}'></a> ${Engineer.github}</p>
+                       <p>Github: <a href='https://github.com/${Engineer.github}' target="_blank"></a> ${Engineer.github}</p>
                     </div>
                   </div>  
                `;
