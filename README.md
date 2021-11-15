@@ -27,7 +27,7 @@ Each team member will display the following:
 * Role
 * ID
 * Email Address
-* Role-specific property: office number, github username, or school
+* Role-specific property: office number, github username, or school (Note: clicking on the displayed github username will open the user's GitHub profile in a new tab)
 
 ## Testing
 
